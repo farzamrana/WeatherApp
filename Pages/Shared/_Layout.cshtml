@@ -1,0 +1,73 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - WeatherApp</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="~/css/site.css" />
+    <style>
+        /* Splash Screen Styles */
+        #splash-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #fff;
+            z-index: 9999; /* Make sure it's on top */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .splash-logo {
+            width: 150px; /* Adjust size as needed */
+        }
+        .splash-message {
+            font-size: 1.5rem;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <!-- Splash Screen -->
+    <div id="splash-screen">
+        <div class="text-center">
+            <img src="~/images/logo.png" alt="WeatherApp Logo" class="splash-logo" />
+            <div class="splash-message">Loading...</div>
+        </div>
+    </div>
+
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#">WeatherApp</a>
+        </nav>
+    </header>
+    <main role="main" class="container">
+        @RenderBody()
+    </main>
+    <footer class="footer bg-light">
+        <div class="container">
+            <p class="text-center">© 2024 WeatherApp</p>
+        </div>
+    </footer>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+   
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        // JavaScript to hide the splash screen
+        window.addEventListener('load', function () {
+            const splashScreen = document.getElementById('splash-screen');
+            splashScreen.style.opacity = 0;
+            setTimeout(() => {
+                splashScreen.style.display = 'none';
+            }, 500); // Match with the opacity transition duration
+        });
+    </script>
+</body>
+</html>

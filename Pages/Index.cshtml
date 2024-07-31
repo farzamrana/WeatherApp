@@ -1,0 +1,59 @@
+﻿@page
+@model WeatherApp.Pages.IndexModel
+@{
+    ViewData["Title"] = "Weather App";
+}
+
+<div class="container mt-4">
+    <h1 class="text-center mb-4">Weather Forecast</h1>
+
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <form method="get" class="input-group mb-3">
+                <input type="text" name="city" class="form-control" placeholder="Enter city" value="@Model.City" aria-label="City" aria-describedby="button-addon2" />
+                <div class="input-group-append">
+                    <button class="btn btn-primary" type="submit" id="button-addon2">Get Weather</button>
+                </div>
+            </form>
+
+            @if (Model.Weather != null)
+            {
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        Weather in @Model.Weather.Name
+                    </div>
+                    <div class="card-body">
+                        @if (Model.Weather.Main != null)
+                        {
+                            <h5 class="card-title">Current Conditions</h5>
+                            <p class="card-text">
+                                <strong>Temperature:</strong> @Model.Weather.Main.Temp &deg;C<br />
+                                <strong>Feels Like:</strong> @Model.Weather.Main.FeelsLike &deg;C<br />
+                                <strong>Min Temperature:</strong> @Model.Weather.Main.TempMin &deg;C<br />
+                                <strong>Max Temperature:</strong> @Model.Weather.Main.TempMax &deg;C<br />
+                                <strong>Pressure:</strong> @Model.Weather.Main.Pressure hPa<br />
+                                <strong>Humidity:</strong> @Model.Weather.Main.Humidity %
+                            </p>
+                        }
+                        @if (Model.Weather.Weather != null && Model.Weather.Weather.Any())
+                        {
+                            <p class="card-text">
+                                <strong>Description:</strong> @Model.Weather.Weather.FirstOrDefault()?.Description ?? "No description available"
+                            </p>
+                        }
+                        else
+                        {
+                            <p class="card-text">No weather description available.</p>
+                        }
+                    </div>
+                </div>
+            }
+            else if (!string.IsNullOrEmpty(Model.City))
+            {
+                <div class="alert alert-danger mt-3" role="alert">
+                    Weather data could not be retrieved. Please try again.
+                </div>
+            }
+        </div>
+    </div>
+</div>
